@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Show all Gp-Patient Registrations</h4>
+<div class="col-6">
+    <h3 th:unless="${gpPatientRegistrations} and ${gpPatientRegistrations.size()}">There are no Gp-Patient Registrations!</h3>
+    <table th:if="${gpPatientRegistrations.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Patient's first name</th>
+        <th>Patient's last name</th>
+        <th>Patient's egn</th>
+        <th>Doctor's first name</th>
+        <th>Doctor's last name</th>
+        <th>Doctor's egn</th>
+        <th sec:authorize="hasAnyRole('ADMIN')">Edit</th>
+        <th sec:authorize="hasAnyRole('ADMIN')">Delete</th>
+        <tr th:each="gpPatientRegistration : ${gpPatientRegistrations}">
+            <td th:text="${gpPatientRegistration.id}"></td>
+            <td th:text="${gpPatientRegistration.gpPatientRegistrationData.patient.firstName}"></td>
+            <td th:text="${gpPatientRegistration.gpPatientRegistrationData.patient.lastName}"></td>
+            <td th:text="${gpPatientRegistration.gpPatientRegistrationData.patient.egn}"></td>
+            <td th:text="${gpPatientRegistration.gpPatientRegistrationData.doctor.firstName}"></td>
+            <td th:text="${gpPatientRegistration.gpPatientRegistrationData.doctor.lastName}"></td>
+            <td th:text="${gpPatientRegistration.gpPatientRegistrationData.doctor.egn}"></td>
+            <td sec:authorize="hasAnyRole('ADMIN')"><a class="btn btn-info" th:href="@{'/gp-patient-registrations/edit-gp-patient-registration/'+${gpPatientRegistration.id}}">Edit</a>
+            </td>
+            <td sec:authorize="hasAnyRole('ADMIN')"><a class="btn btn-danger" th:href="@{'/gp-patient-registrations/delete/'+${gpPatientRegistration.id}}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

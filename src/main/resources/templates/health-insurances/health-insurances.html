@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Show all Health Insurances</h4>
+<div class="col-6">
+    <h3 th:unless="${healthInsurances} and ${healthInsurances.size()}">There are no health insurances!</h3>
+    <table th:if="${healthInsurances.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Patient's first name</th>
+        <th>Patient's last name</th>
+        <th>Patient's egn</th>
+        <th>Health Insurance Fee</th>
+        <th>Month</th>
+        <th sec:authorize="hasAnyRole('ADMIN')">Edit</th>
+        <th sec:authorize="hasAnyRole('ADMIN')">Delete</th>
+        <tr th:each="healthInsurance : ${healthInsurances}">
+            <td th:text="${healthInsurance.id}"></td>
+            <td th:text="${healthInsurance.healthInsuranceData.patient.firstName}"></td>
+            <td th:text="${healthInsurance.healthInsuranceData.patient.lastName}"></td>
+            <td th:text="${healthInsurance.healthInsuranceData.patient.egn}"></td>
+            <td th:text="${healthInsurance.healthInsuranceData.healthInsuranceFee}"></td>
+            <td th:text="${#dates.format(healthInsurance.healthInsuranceData.month, 'dd/MM/yyyy')}"></td>
+            <td sec:authorize="hasAnyRole('ADMIN')"><a class="btn btn-info" th:href="@{'/health-insurances/edit-health-insurance/'+${healthInsurance.id}}">Edit</a>
+            </td>
+            <td sec:authorize="hasAnyRole('ADMIN')"><a class="btn btn-danger" th:href="@{'/health-insurances/delete/'+${healthInsurance.id}}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

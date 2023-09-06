@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Register a Patient Disease Record</h4>
+<div class="col-6">
+    <h3 th:unless="${patientDiseaseRecords} and ${patientDiseaseRecords.size()}">There are no Patient Disease
+        Records!</h3>
+    <table th:if="${patientDiseaseRecords.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Patient's first name</th>
+        <th>Patient's last name</th>
+        <th>Patient's egn</th>
+        <th>Doctor's first name</th>
+        <th>Doctor's last name</th>
+        <th>Doctor's egn</th>
+        <th>Treatment</th>
+        <th>Sick leave duration</th>
+        <th>Visiting time</th>
+        <th>Diagnosis</th>
+        <th sec:authorize="hasAnyRole('ADMIN', 'DOCTOR')">Edit</th>
+        <th sec:authorize="hasAnyRole('ADMIN', 'DOCTOR')">Delete</th>
+        <tr th:each="patientDiseaseRecord : ${patientDiseaseRecords}">
+            <td th:text="${patientDiseaseRecord.id}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.patient.firstName}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.patient.lastName}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.patient.egn}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.doctor.firstName}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.doctor.lastName}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.doctor.egn}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.treatment}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.sickLeaveDuration}"></td>
+            <td th:text="${#dates.format(patientDiseaseRecord.patientDiseaseRecordData.visitingTime, 'dd/MM/yyyy')}"></td>
+            <td th:text="${patientDiseaseRecord.patientDiseaseRecordData.diagnosis}"></td>
+            <td sec:authorize="hasAnyRole('ADMIN', 'DOCTOR')">
+                <a class="btn btn-info"
+                   th:href="@{'/patient-disease-records/edit-patient-disease-record/'+${patientDiseaseRecord.id}}">Edit
+                </a>
+            </td>
+            <td sec:authorize="hasAnyRole('ADMIN', 'DOCTOR')"><a class="btn btn-danger" th:href="@{'/patient-disease-record/delete/'+${patientDiseaseRecord.id}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

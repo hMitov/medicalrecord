@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Edit Doctor</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/doctors/update/{id}(id=${id})}" th:object="${doctor}" method="post">
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input class="form-control" type="text" th:field="*{firstName}" placeholder="FirstName" id="firstName">
+            <span class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</span>
+
+            <label for="lastName">Last name</label>
+            <input class="form-control" type="text" th:field="*{lastName}" placeholder="LastName" id="lastName">
+            <span class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</span>
+
+            <label for="lastName">Egn</label>
+            <input class="form-control" type="text" th:field="*{egn}" placeholder="egn" id="egn">
+            <span class="text-danger" th:if="${#fields.hasErrors('egn')}" th:errors="*{egn}">Egn error</span>
+
+            <label for="age">Age</label>
+            <input class="form-control" type="text" th:field="*{age}" placeholder="age" id="age">
+            <span class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</span>
+
+            <label for="workingPlace">Working place</label>
+            <input class="form-control" type="text" th:field="*{workingPlace}" placeholder="age" id="workingPlace">
+            <span class="text-danger" th:if="${#fields.hasErrors('workingPlace')}" th:errors="*{workingPlace}">Working place error</span>
+
+            <div th:each="specialty : ${specialties}">
+                <input type="checkbox" name="specialties"
+                       th:text="${specialty}"
+                       th:value="${specialty}"
+                       th:field="*{specialties}"><br>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Doctor</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Register a Doctor</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/doctors/create}" th:object="${doctor}" method="post">
+        <div class="form-group col-6">
+            <input class="form-control mt-4" type="text" th:field="*{firstName}" placeholder="First name"
+                   id="firstName">
+            <span class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</span>
+
+            <input class="form-control mt-4" type="text" th:field="*{lastName}" placeholder="Last name" id="lastName">
+            <span class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="*{lastName}">Last name error</span>
+
+            <input class="form-control mt-4" type="text" th:field="*{egn}" placeholder="Egn" id="egn">
+            <span class="text-danger" th:if="${#fields.hasErrors('egn')}" th:errors="*{egn}">Egn error</span>
+
+            <input class="form-control mt-4" type="text" th:field="*{age}" placeholder="Age" id="age">
+            <span class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</span>
+
+            <input class="form-control mt-4" type="text" th:field="*{workingPlace}" placeholder="Working place"
+                   id="workingPlace">
+            <span class="text-danger" th:if="${#fields.hasErrors('workingPlace')}" th:errors="*{workingPlace}">WorkingPlace error</span>
+
+            <label class="mt-4">Specialties:</label><br>
+            <div th:each="specialty : ${specialties}">
+                <input type="checkbox" name="specialties"
+                       th:text="${specialty}"
+                       th:value="${specialty}"
+                       th:field="*{specialties}"><br>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Doctor</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

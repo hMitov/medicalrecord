@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Edit Health Insurance</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/health-insurances/update/{id}(id=${id})}" th:object="${healthInsurance}"
+          method="post">
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input class="form-control" type="text" th:field="*{patient.firstName}" placeholder="FirstName"
+                   id="firstName">
+            <span class="text-danger" th:if="${#fields.hasErrors('patient.firstName')}"
+                  th:errors="*{patient.firstName}">First name error</span>
+
+            <label for="lastName">Last name</label>
+            <input class="form-control" type="text" th:field="*{patient.lastName}" placeholder="LastName" id="lastName">
+            <span class="text-danger" th:if="${#fields.hasErrors('patient.lastName')}"
+                  th:errors="*{patient.lastName}">Last name error</span>
+
+            <label for="lastName">Egn</label>
+            <input class="form-control" type="text" th:field="*{patient.egn}" placeholder="egn" id="egn">
+            <span class="text-danger" th:if="${#fields.hasErrors('patient.egn')}"
+                  th:errors="*{patient.egn}">Egn error</span>
+
+            <label for="healthInsuranceFee">Health Insurance Fee</label>
+            <input class="form-control" type="text" th:field="*{healthInsuranceFee}" placeholder="Health Insurance Fee" id="healthInsuranceFee">
+            <span class="text-danger" th:if="${#fields.hasErrors('healthInsuranceFee')}"
+                  th:errors="*{healthInsuranceFee}">Health Insurance Fee error</span>
+
+            <label for="health-insurance-payment-month">Payment month</label>
+            <input class="form-control" type="date" th:field="*{month}" id="health-insurance-payment-month">
+            <span class="text-danger" th:if="${#fields.hasErrors('month')}"
+                  th:errors="*{month}">Payment month error</span>
+
+        </div>
+        <button type="submit" class="btn btn-primary">Update Health Insurance</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

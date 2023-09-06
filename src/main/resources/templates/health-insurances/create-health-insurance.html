@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Register a Health Insurance</h4>
+<div class="col-6 mt-5">
+    </form>
+    <form action="#" th:action="@{/health-insurances/create}" th:object="${healthInsurance}" method="post">
+        <div class="form-group col-6">
+            <input class="form-control mt-4" type="text" th:field="*{patient.firstName}" placeholder="First name"
+                   id="firstName">
+            <span class="text-danger" th:if="${#fields.hasErrors('patient.firstName')}"
+                  th:errors="*{patient.firstName}">First name error</span>
+
+            <input class="form-control mt-4" type="text" th:field="*{patient.lastName}" placeholder="Last name"
+                   id="lastName">
+            <span class="text-danger" th:if="${#fields.hasErrors('patient.lastName')}" th:errors="*{patient.lastName}">Last name error</span>
+
+            <input class="form-control mt-4" type="text" th:field="*{patient.egn}" placeholder="Egn" id="egn">
+            <span class="text-danger" th:if="${#fields.hasErrors('patient.egn')}"
+                  th:errors="*{patient.egn}">Egn error</span>
+
+            <input class="form-control mt-4" type="text" th:field="*{healthInsuranceFee}"
+                   placeholder="Health insurance fee" id="healthInsuranceFee">
+            <span class="text-danger" th:if="${#fields.hasErrors('healthInsuranceFee')}"
+                  th:errors="*{healthInsuranceFee}">Health insurance fee error</span>
+
+            <input class="form-control mt-4" type="date" th:field="*{month}" id="health-insurance-month">
+            <span class="text-danger" th:if="${#fields.hasErrors('month')}" th:errors="*{month}">Month error</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Health Insurance</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

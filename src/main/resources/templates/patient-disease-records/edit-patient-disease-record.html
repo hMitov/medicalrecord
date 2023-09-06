@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Edit a Patient Disease Record</h4>
+<div class="col-6 mt-5">
+    </form>
+    <form action="#" th:action="@{/patient-disease-records/update/{id}(id=${id})}" th:object="${patientDiseaseRecord}" method="post">
+        <div class="form-group col-6">
+            <input class="form-control mt-4" type="text" th:field="*{patient.firstName}"
+                   placeholder="Patient's first name"
+                   id="pFirstName">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('patient.firstName')}" th:errors="*{patient.firstName}">First name error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{patient.lastName}"
+                   placeholder="Patient's last name"
+                   id="pLastName">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('patient.lastName')}" th:errors="*{patient.lastName}">Last name error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{patient.egn}" placeholder="Patient's egn"
+                   id="pEgn">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('patient.egn')}" th:errors="*{patient.egn}">Egn error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{doctor.firstName}"
+                   placeholder="Doctor's first name"
+                   id="dFirstName">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('doctor.firstName')}" th:errors="*{doctor.firstName}">First name error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{doctor.lastName}" placeholder="Doctor's last name"
+                   id="dLastName">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('doctor.lastName')}" th:errors="*{doctor.lastName}">Last name error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{doctor.egn}" placeholder="Doctor's egn" id="dEgn">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('doctor.egn')}" th:errors="*{doctor.egn}">Egn error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{treatment}" placeholder="Treatment" id="treatment">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('treatment')}" th:errors="*{treatment}">Treatment error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{sickLeaveDuration}"
+                   placeholder="Sick Leave Duration in days" id="sickLeaveDuration">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('sickLeaveDuration')}" th:errors="*{sickLeaveDuration}">Sick leave duration error</span>-->
+
+            <input class="form-control mt-4" type="date" th:field="*{visitingTime}" id="visitingTime">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('visitingTime')}" th:errors="*{visitingTime}">Visiting time error</span>-->
+
+            <input class="form-control mt-4" type="text" th:field="*{diagnosis}" placeholder="Diagnosis" id="diagnosis">
+<!--            <span class="text-danger" th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}">Diagnosis time error</span>-->
+
+        </div>
+        <button type="submit" class="btn btn-primary">Update Patient Disease Record</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
